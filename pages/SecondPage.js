@@ -12,7 +12,7 @@ const SecondPage = ({navigation}) => {
                 </Text>
             <Button style={styles.textBottomSytle}
               title='GO TO FRIST PAGE'
-              onPress={()=>navigation.popToTop()}
+              onPress={()=>navigation.navigate('Fristpage')}
             />
             <Button style={styles.textBottomSytle}
               title='GO TO THIRD PAGE'
