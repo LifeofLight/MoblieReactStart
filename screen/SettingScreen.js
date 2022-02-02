@@ -1,20 +1,25 @@
-import { Text, View ,Button,SafeAreaView} from 'react-native';
+import { StyleSheet, Text, View ,SafeAreaView,Button} from 'react-native';
 import React from 'react';
 import {styles} from '../components/styles';
-const HomeScreen = ({navigation}) => {
+
+const SettingScreen = ({navigation}) => {
   return (
-    <SafeAreaView style={{flex:1}}>
+        <SafeAreaView style={{flex:1}}>
         <View style={{flex:1}}>
             <View style={styles.container}>
               <Text style={styles.textTopStyle}>
-                Home Screen
+                Setting Screen
               </Text>
               <Button style={styles.buttomStyle}
-              title='GO to setting Tab'
-              onPress={()=>navigation.navigate('SettingScreen')}
+              title='Go to Home Tab'
+              onPress={()=>navigation.navigate('HomeScreen')}
             />
               <Button style={styles.buttomStyle}
               title='Open News Screen'
+            />
+            <Button style={styles.buttomStyle}
+              title='Open Profile Screen'
+              onPress={()=>navigation.navigate('ProfileScreen')}
             />
             <View style={{bottom:10,position:"absolute"}}>
             <Text style ={styles.textBottomSytle}>
@@ -27,6 +32,5 @@ const HomeScreen = ({navigation}) => {
   );
 };
 
-export default HomeScreen;
-
+export default SettingScreen;
 
