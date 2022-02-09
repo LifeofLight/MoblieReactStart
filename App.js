@@ -140,7 +140,7 @@
 
 // import { NavigationContainer } from "@react-navigation/native";
 // import { createStackNavigator } from "@react-navigation/stack";
-// import {createDrawerNavigator} from '@react-navigation/drawer';
+// import { createDrawerNavigator } from '@react-navigation/drawer';
 
 
 // import Fristpage from "./pages/Fristpage";
@@ -159,10 +159,10 @@
 //   return(
 //     <View style={{flexDirection :'row'}}>
 //       <TouchableOpacity onPress={() => toggleDrawer()}>
-        // <Image
-        //   source={require('D:/Moblie/Mo1/assets/drawerWhite.png')}
-        //   style={{width:25,height:25,marginLeft:5}}
-        // />
+//         <Image
+//           source={require('D:/Moblie/Mo1/assets/drawerWhite.png')}
+//           style={{width:25,height:25,marginLeft:5}}
+//         />
 
 //       </TouchableOpacity>
 //     </View>
@@ -302,24 +302,147 @@
 
 // export default App;
 
+//การบ้าน 2/2/2022
+
+// import { StyleSheet, Text, View ,Image,TouchableOpacity} from 'react-native';
+// import React from 'react';
+
+// import { NavigationContainer } from "@react-navigation/native";
+// import { createBottomTabNavigator } from'@react-navigation/bottom-tabs';
+// import Ionicons from'react-native-vector-icons/Ionicons';
+// import { createStackNavigator } from "@react-navigation/stack";
+
+// import HomeScreen from'./screen/HomeScreen';
+// import ProfileScreen from'./screen/ProfileScreen';
+// import SettingScreen from'./screen/SettingScreen';
+
+// const Tab =createBottomTabNavigator();
+// const Stack = createStackNavigator();
+
+// function HomeStack({navigation}) {
+//   return(
+//      <Stack.Navigator
+//         initialRouteName= "HomeScreen"
+//         screenOptions={{
+//           //Set Header Color
+//           headerStyle:{backgroundColor:'#afbc'},
+//           //Set Header text Color
+//           headerTintColor:'#000',
+//           //Set Header text style
+//           headerTitleStyle:{fontWeight:'bold'},
+//         }}
+//       >
+//         <Stack.Screen name='HomeScreen'
+//          component={HomeScreen}
+//          options={{title:'Home Page'}}
+//          />
+//   </Stack.Navigator>
+//   )
+// }
+// function SettingStack({navigation}) {
+//   return(
+//      <Stack.Navigator
+//         initialRouteName= "HomeScreen"
+//         screenOptions={{
+//           //Set Header Color
+//           headerStyle:{backgroundColor:'#afbc'},
+//           //Set Header text Color
+//           headerTintColor:'#000',
+//           //Set Header text style
+//           headerTitleStyle:{fontWeight:'bold'},
+//         }}
+//       >
+//         <Stack.Screen name='SettingScreen'
+//          component={SettingScreen}
+//          options={{title:'Setting Page'}}
+//          />
+//          <Stack.Screen name ='ProfileScreen'
+//          component={ProfileScreen}
+//          options={{title:'Profile Page'}}
+//          />
+//   </Stack.Navigator>
+//   )
+// }
+
+// function App() {
+//   return(
+//     <NavigationContainer>
+//       <Tab.Navigator
+//         screenOptions={({route})=>({
+//           tabBarIcon:({focused})=>{
+//             let iconName;
+//             if(route.name === 'Home'){
+//               iconName=focused? 
+//               <Image source={require('./assets/logo1.png')}
+//           style={{width:25,height:25}}/>
+//             :<Image source={require('./assets/logo2.png')}
+//           style={{width:25,height:25,marginLeft:5}}/>;
+//             }
+//             else if (route.name==='Setting'){
+//               iconName=focused
+//               ? <Image source={require('./assets/logo1.png')}
+//           style={{width:25,height:25,marginLeft:5}}/>
+//             :<Image source={require('./assets/logo3.png')}
+//           style={{width:25,height:25,marginLeft:5}}/>;
+//             }
+//           return iconName;
+//           },
+//         })}
+//     tabBarOptions={{
+//       activeTintColor:'#afcc',
+//       inactiveTintColor:'gray'
+//     }}
+//       >
+//         <Tab.Screen name="Home" component={HomeStack}/>
+//         <Tab.Screen name="Setting" component={SettingStack}/>
+//       </Tab.Navigator>
+
+//     </NavigationContainer>
+
+//   )
+// }
+
+// export default App;
+
 import { StyleSheet, Text, View ,Image,TouchableOpacity} from 'react-native';
 import React from 'react';
 
 import { NavigationContainer } from "@react-navigation/native";
-import { createBottomTabNavigator } from'@react-navigation/bottom-tabs';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 import Ionicons from'react-native-vector-icons/Ionicons';
 import { createStackNavigator } from "@react-navigation/stack";
 
-import HomeScreen from'./screen/HomeScreen';
-import ProfileScreen from'./screen/ProfileScreen';
-import SettingScreen from'./screen/SettingScreen';
 
-const Tab =createBottomTabNavigator();
-const Stack = createStackNavigator();
+import HomeScreen from'./screen/HomeScreen';
+import DetailScreen from'./screen/DetailScreen';
+import AboutScreen from'./screen/AboutScreen';
+import ProductScreen from './screen/ProductScreen';
+import MenuScreen from './screen/MenuScreen';
+
+const Drawer =createDrawerNavigator();
+const Stack =createStackNavigator();
+
+const NavigationDrawerStructure =(props)=>{
+  //Structure for the navigation Drawer
+  const toggleDrawer = () => {
+    props.navigationProps.toggleDrawer();
+  };
+  return(
+    <View style={{flexDirection :'row'}}>
+      <TouchableOpacity onPress={() => toggleDrawer()}>
+        <Image
+          source={require('D:/Moblie/Mo1/assets/drawerWhite.png')}
+          style={{width:25,height:25,marginLeft:5}}
+        />
+
+      </TouchableOpacity>
+    </View>
+  );
+};
 
 function HomeStack({navigation}) {
   return(
-     <Stack.Navigator
+  <Stack.Navigator
         initialRouteName= "HomeScreen"
         screenOptions={{
           //Set Header Color
@@ -328,18 +451,26 @@ function HomeStack({navigation}) {
           headerTintColor:'#000',
           //Set Header text style
           headerTitleStyle:{fontWeight:'bold'},
+          headerLeft:()=><NavigationDrawerStructure navigationProps={navigation}/>,
         }}
       >
         <Stack.Screen name='HomeScreen'
          component={HomeScreen}
-         options={{title:'Home Page'}}
+         options={{title:'หน้าหลัก'}}
          />
+         <Stack.Screen
+         name ='About'
+         component={AboutScreen}
+         options={{title :'เกี่ยวกับเรา'}}
+         />
+         
   </Stack.Navigator>
   )
 }
-function SettingStack({navigation}) {
+
+function ProductStack({navigation}) {
   return(
-     <Stack.Navigator
+    <Stack.Navigator
         initialRouteName= "HomeScreen"
         screenOptions={{
           //Set Header Color
@@ -348,57 +479,42 @@ function SettingStack({navigation}) {
           headerTintColor:'#000',
           //Set Header text style
           headerTitleStyle:{fontWeight:'bold'},
+          headerLeft:()=><NavigationDrawerStructure navigationProps={navigation}/>,
         }}
       >
-        <Stack.Screen name='SettingScreen'
-         component={SettingScreen}
-         options={{title:'Setting Page'}}
+         <Stack.Screen name='ProductScreen'
+         component={ProductScreen}
          />
-         <Stack.Screen name ='ProfileScreen'
-         component={ProfileScreen}
-         options={{title:'Profile Page'}}
+        <Stack.Screen name='Detail'
+         component={DetailScreen}
          />
-  </Stack.Navigator>
+      </Stack.Navigator>
   )
+  
 }
 
-function App() {
-  return(
+
+const App = () => {
+  return (
     <NavigationContainer>
-      <Tab.Navigator
-        screenOptions={({route})=>({
-          tabBarIcon:({focused})=>{
-            let iconName;
-            if(route.name === 'Home'){
-              iconName=focused? 
-              <Image source={require('./assets/logo1.png')}
-          style={{width:25,height:25}}/>
-            :<Image source={require('./assets/logo2.png')}
-          style={{width:25,height:25,marginLeft:5}}/>;
-            }
-            else if (route.name==='Setting'){
-              iconName=focused
-              ? <Image source={require('./assets/logo1.png')}
-          style={{width:25,height:25,marginLeft:5}}/>
-            :<Image source={require('./assets/logo3.png')}
-          style={{width:25,height:25,marginLeft:5}}/>;
-            }
-          return iconName;
-          },
-        })}
-    tabBarOptions={{
-      activeTintColor:'#afcc',
-      inactiveTintColor:'gray'
-    }}
+      <Drawer.Navigator 
+      initialRouteName ="HomeStack"
+      drawerPosition ="left"
+      drawerContentOptions={{
+          activeTintColor:'#aaffb0',
+          itemStyle:{marginVertical:5},
+        }}
+      drawerContent = {(props)=><MenuScreen {...props}/>}
       >
-        <Tab.Screen name="Home" component={HomeStack}/>
-        <Tab.Screen name="Setting" component={SettingStack}/>
-      </Tab.Navigator>
-
+        
+        <Drawer.Screen
+        name ="HomeStack" component={HomeStack}
+        />
+        <Drawer.Screen
+        name ="ProductStack" component={ProductStack}
+        />
+      </Drawer.Navigator>
     </NavigationContainer>
-
-  )
-}
-
+  );
+};
 export default App;
-
