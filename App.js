@@ -418,27 +418,12 @@ import DetailScreen from'./screen/DetailScreen';
 import AboutScreen from'./screen/AboutScreen';
 import ProductScreen from './screen/ProductScreen';
 import MenuScreen from './screen/MenuScreen';
+import RegisterScreen from './screen/RegisterScreen';
 
 const Drawer =createDrawerNavigator();
 const Stack =createStackNavigator();
 
-const NavigationDrawerStructure =(props)=>{
-  //Structure for the navigation Drawer
-  const toggleDrawer = () => {
-    props.navigationProps.toggleDrawer();
-  };
-  return(
-    <View style={{flexDirection :'row'}}>
-      <TouchableOpacity onPress={() => toggleDrawer()}>
-        <Image
-          source={require('D:/Moblie/Mo1/assets/drawerWhite.png')}
-          style={{width:25,height:25,marginLeft:5}}
-        />
 
-      </TouchableOpacity>
-    </View>
-  );
-};
 
 function HomeStack({navigation}) {
   return(
@@ -451,7 +436,6 @@ function HomeStack({navigation}) {
           headerTintColor:'#000',
           //Set Header text style
           headerTitleStyle:{fontWeight:'bold'},
-          headerLeft:()=><NavigationDrawerStructure navigationProps={navigation}/>,
         }}
       >
         <Stack.Screen name='HomeScreen'
@@ -462,6 +446,11 @@ function HomeStack({navigation}) {
          name ='About'
          component={AboutScreen}
          options={{title :'เกี่ยวกับเรา'}}
+         />
+         <Stack.Screen 
+         name= 'Register'
+         component={RegisterScreen}
+         options ={{title :'ลงทะเบียร'}}
          />
          
   </Stack.Navigator>
@@ -479,7 +468,6 @@ function ProductStack({navigation}) {
           headerTintColor:'#000',
           //Set Header text style
           headerTitleStyle:{fontWeight:'bold'},
-          headerLeft:()=><NavigationDrawerStructure navigationProps={navigation}/>,
         }}
       >
          <Stack.Screen name='ProductScreen'
